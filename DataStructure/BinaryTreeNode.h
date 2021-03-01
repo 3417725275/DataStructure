@@ -1,6 +1,5 @@
 #pragma once
 
-
 #ifndef _BinaryTreeNode_H
 #define _BinaryTreeNode_H
 #include <iostream>
@@ -12,7 +11,7 @@ class BinaryTreeNode
 public:
 	//构造
 	BinaryTreeNode() :leftchild(nullptr), rightchild(nullptr) {}
-	BinaryTreeNode(const T& dt, const BinaryTreeNode<T>* &lc, const BinaryTreeNode<T>* &rc) :data(dt), leftchild(lc), rightchild(rc) {}
+	BinaryTreeNode(const T& dt,  BinaryTreeNode<T>* lc,  BinaryTreeNode<T>* rc) :data(dt), leftchild(lc), rightchild(rc) {}
 	BinaryTreeNode(const T& dt) :BinaryTreeNode(dt, nullptr, nullptr) {}
 
 	//拷贝构造
@@ -31,14 +30,14 @@ public:
 			data = dt;
 		}
 	}
-	void Setleftchild(const BinaryTreeNode<T>* &lc)
+	void Setleftchild(BinaryTreeNode<T>* lc)
 	{
 		if (this != nullptr)
 		{
 			leftchild = lc;
 		}
 	}
-	void Setrightchild(const BinaryTreeNode<T>* &rc)
+	void Setrightchild(BinaryTreeNode<T>* rc)
 	{
 		if (this != nullptr)
 		{

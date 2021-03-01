@@ -158,14 +158,55 @@ inline void BinaryTree<T>::levelOrder() const
 }
 
 template<typename T>
- BinaryTreeNode<T>* BinaryTree<T>::find(T & dt) const
+BinaryTreeNode<T>* BinaryTree<T>::find(T & dt) const
 {
-	return NULL;
+	if (root == nullptr)
+		return nullptr;
+	BinaryTreeNode<T>* start = root;
+	while (start!=nullptr)
+	{
+		if (start->data == dt)
+			return start;
+		if (dt < start->data)
+			start = start->leftchild;
+		else
+			start = start->rightchild;
+	}
+	return nullptr;
 }
 
 template<typename T>
 bool BinaryTree<T>::insert(const T & item)
 {
+	BinaryTreeNode<T>* start = root;
+	BinaryTreeNode<T>* newnode = new BinaryTreeNode<T>(item);
+
+
+	if (root == nullptr)
+		root = newnode;
+	while (start != nullptr)
+	{
+		if (start->GetData() == item)
+			std::cout << "This item is exit !" << std::endl;
+		if (item < start->GetData())
+		{
+			if (start->Getleftchild() == nullptr)
+			{
+				start->Setleftchild(newnode);
+				return true;
+			}
+			start = start->Getleftchild();
+		}
+		else //item > start->data
+		{
+			if (start->Getrightchild() == nullptr)
+			{
+				start->Setrightchild(newnode);
+				return true;
+			}
+			start = start->Getrightchild();
+		}
+	}
 	return false;
 }
 
