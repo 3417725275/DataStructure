@@ -3,6 +3,7 @@
 
 #include "stdafx.h"
 #include "BinaryTreeNode.h"
+#include "BinaryTree.h"
 
 int main()
 {

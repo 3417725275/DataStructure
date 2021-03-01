@@ -4,7 +4,7 @@
 #ifndef _BinaryTreeNode_H
 #define _BinaryTreeNode_H
 #include <iostream>
-
+#include <queue>
 
 template <typename T>
 class BinaryTreeNode
@@ -48,7 +48,7 @@ public:
 
 	//拷贝节点
 	BinaryTreeNode<T>* Copy(const BinaryTreeNode<T>* x);
-	
+
 	//销毁以本节点为根的子树
 	void Destory()
 	{
@@ -61,23 +61,23 @@ public:
 	}
 
 	//高度和节点数量
-	int height();
-	int size();
+	int height()const;
+	int size() const;//以本节点为根的子树的节点数
 
 	//相等性判断
 	friend bool equal(const BinaryTreeNode<T>* a, const BinaryTreeNode<T>* b);
 
 
 	//前中后遍历
-	void preOrder();//前序遍历
-	void InOrder();//中序遍历
-	void PostOrder();//后序遍历
+	void preOrder() const;//前序遍历
+	void InOrder() const;//中序遍历
+	void PostOrder() const;//后序遍历
+	void levelOrder() const;//层次遍历
 
 private:
 	T data;
 	BinaryTreeNode<T>* leftchild, *rightchild;
 };
-
 
 
 template<typename T>
@@ -110,7 +110,7 @@ BinaryTreeNode<T>* BinaryTreeNode<T>::Copy(const BinaryTreeNode<T>* x)
 }
 
 template<typename T>
-int BinaryTreeNode<T>::height()
+int BinaryTreeNode<T>::height() const
 {
 	if (this != nullptr)
 	{
@@ -122,7 +122,7 @@ int BinaryTreeNode<T>::height()
 }
 
 template<typename T>
-int BinaryTreeNode<T>::size()
+int BinaryTreeNode<T>::size() const
 {
 	if (this != nullptr)
 	{
@@ -132,7 +132,7 @@ int BinaryTreeNode<T>::size()
 }
 
 template<typename T>
-void BinaryTreeNode<T>::preOrder()
+void BinaryTreeNode<T>::preOrder() const
 {
 	if (this != nullptr)
 	{
@@ -143,7 +143,7 @@ void BinaryTreeNode<T>::preOrder()
 }
 
 template<typename T>
-void BinaryTreeNode<T>::InOrder()
+void BinaryTreeNode<T>::InOrder() const
 {
 	if (this != nullptr)
 	{
@@ -154,13 +154,33 @@ void BinaryTreeNode<T>::InOrder()
 }
 
 template<typename T>
-void BinaryTreeNode<T>::PostOrder()
+void BinaryTreeNode<T>::PostOrder() const
 {
 	if (this != nullptr)
 	{
 		this->leftchild->preOrder();
 		this->rightchild->preOrder();
 		std::cout << "--->" << this.data << std::endl;
+	}
+}
+
+template<typename T>
+void BinaryTreeNode<T>::levelOrder() const
+{
+	if (this == nullptr)
+		return;
+	queue<BinaryTreeNode<T>*> nodeQueue;
+	nodeQueue.push(this);
+	BinaryTreeNode<T>* temp;
+	while (!nodeQueue.empty())
+	{
+		temp = nodeQueue.front();
+		std::cout << "--->" << temp.data << std::endl;
+		if (temp = temp->Getleftchild())
+			nodeQueue.push(temp);
+		if (temp = temp->Getrightchild())
+			nodeQueue.push(temp);
+		nodeQueue.pop();
 	}
 }
 
