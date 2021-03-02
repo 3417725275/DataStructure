@@ -16,7 +16,7 @@ class BSTree :public BinaryTree<T>
 public:
 	//构造函数
 	BSTree() :BinaryTree() {}
-	BSTree(BinaryTreeNode<T>* x) :BinaryTree(x) {}
+	BSTree(BinaryTreeNode<T>* x);
 
 	//子类隐藏父类同名函数
 	//bool empty() const { return BinaryTree::empty(); }
@@ -25,8 +25,21 @@ public:
 	//bool insert(const T& item) { return BinaryTree::insert(item); }
 
 	void erase(const T& item);
+	BinaryTreeNode<T>* makeBSTree(T element[], int n);
 };
 
+template<typename T>
+BSTree<T>::BSTree(BinaryTreeNode<T>* x)
+{
+	while (x != nullptr)
+	{
+		insert(x->data);
+		if ((x = x->Getleftchild()) == nullptr)
+		{
+			x = x->Getrightchild();
+		}
+	}
+}
 
 template<typename T>
 void BSTree<T>::erase(const T & item)
@@ -97,4 +110,19 @@ void BSTree<T>::erase(const T & item)
 	delete pdNode;
 
 }
+
+template<typename T>
+BinaryTreeNode<T>* BSTree<T>::makeBSTree(T* element, int n)
+{
+	BinaryTreeNode<T>* rootTree = root;
+	root = nullptr;
+	for (int i=0;i<n;i++)
+	{
+		insert(element[i]);
+	}
+	BinaryTreeNode<T>* bstree = root;
+	root = rootTree;
+	return bstree;
+}
+
 #endif
