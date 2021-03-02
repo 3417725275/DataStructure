@@ -32,33 +32,69 @@ template<typename T>
 void BSTree<T>::erase(const T & item)
 {
 	//查找关键字为item的节点
-	BinaryTreeNode<T>*dnode = find(item);
-	if (dnode == nullptr)
+	BinaryTreeNode<T>*dNode = find(item);
+	if (dNode == nullptr)
 		return;
+	BinaryTreeNode<T>* pdNode = getParent(dNode);
 
-	//dnode有两个孩子时
-	BinaryTreeNode<T>* pleft = dnode->Getleftchild();
-	BinaryTreeNode<T>* pright = dnode->Getrightchild();
+	//dNode有两个孩子时
+	BinaryTreeNode<T>* pleft = dNode->Getleftchild();
+	BinaryTreeNode<T>* pright = dNode->Getrightchild();
 	if (pleft != nullptr && pright != nullptr)
 	{
-		//在dnode的左子树中寻找最大的元素(parent)    ，也可将右子树的最小元素移到dnode
-		BinaryTreeNode<T> *max = dnode, *s = pleft;
-		while (s != nullptr)
+		//在dNode的左子树中寻找最大的元素(parent)    ，也可将右子树的最小元素移到dNode
+		BinaryTreeNode<T> *parent = dNode, *max = pleft, *temp;
+		while (temp = max->Getrightchild() != nullptr)
 		{
-			max = s;
-			s = s->Getrightchild();
+			parent = max;  //左子树最大元素的双亲
+			max = temp;  //左子树最大元素
 		}
 
-		//将左子树最大元素max移到dnode
+		//将左子树最大元素max移到dNode
 		BinaryTreeNode<T>* q = new BinaryTreeNode<T>(max->GetData(), pleft, pright);
+		if (pdNode == nullptr) //要删除的节点是树的根节点
+			root = q;
+		else if (dNode == pdNode->Getleftchild()) //要删除的是某个根的左孩子节点
+			pdNode->Setleftchild(dNode);
+		else                         //要删除的是某个根的右孩子节点
+			pdNode->Setrightchild(dNode);
 
-		
-
-
-
-		delete dnode;
-		dnode = nullptr;
+		//这块需要完善，特殊情况！如果左子树最大元素是要删除节点的孩子节点,P344图14-4(a)的情况
+		if (parent == dNode)//
+		{
+			q->Setleftchild(max->Getleftchild());
+			delete max;
+		}
+		else
+		{
+			parent->Setrightchild(nullptr);
+			delete max;
+		}
+		delete dNode;
+		dNode = nullptr;
 	}
-}
 
+
+	//dNode最多只有一个孩子,child存放其孩子
+	BinaryTreeNode<T>* child = pdNode->Getleftchild();
+	if (child == nullptr)
+		child = pdNode->Getrightchild();
+	if (child == nullptr)//两颗子树均为空
+	{
+		delete pdNode;
+		return;
+	}
+
+	if (dNode == root)
+		root = child;
+	else //dNode是左孩子还是右孩子
+	{
+		if (dNode = pdNode->Getleftchild())
+			pdNode->Setleftchild(child);
+		else
+			pdNode->Setrightchild(child);
+	}
+	delete pdNode;
+
+}
 #endif
