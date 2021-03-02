@@ -121,7 +121,7 @@ BinaryTreeNode<T>* BinaryTree<T>::getParent(BinaryTreeNode<T>*& node)
 {
 	if (this == nullptr || node == nullptr || node == this)
 		return nullptr;
-	return(this, node);
+	return getParent(this, node);
 }
 
 template<typename T>
@@ -181,13 +181,15 @@ bool BinaryTree<T>::insert(const T & item)
 	BinaryTreeNode<T>* start = root;
 	BinaryTreeNode<T>* newnode = new BinaryTreeNode<T>(item);
 
-
 	if (root == nullptr)
 		root = newnode;
 	while (start != nullptr)
 	{
-		if (start->GetData() == item)
+		if (start->GetData() == item) 
+		{
 			std::cout << "This item is exit !" << std::endl;
+			return false;
+		}
 		if (item < start->GetData())
 		{
 			if (start->Getleftchild() == nullptr)
