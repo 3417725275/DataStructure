@@ -25,7 +25,7 @@ public:
 	//bool insert(const T& item) { return BinaryTree::insert(item); }
 
 	void erase(const T& item);
-	BinaryTreeNode<T>* makeBSTree(T element[], int n);
+	BinaryTreeNode<T>* makeBSTree(T* element, int n);
 };
 
 template<typename T>
