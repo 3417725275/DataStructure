@@ -16,11 +16,11 @@ public:
 
 	bool empty() const { return BinaryTree<T>::empty(); }
 	int size() const { return BinaryTree<T>::size(); }
+
 	const T& top()
 	{//返回最大的元素，根节点最大
-		if (treeSize == 0)
-
-			return root->element.second;
+		if (this->size() != 0)
+			return root->GetData();
 	}
 	void pop();
 	void push(const T&);
