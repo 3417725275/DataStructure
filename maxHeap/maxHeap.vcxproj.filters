@@ -27,6 +27,9 @@
     <ClInclude Include="maxHeap.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="changeLength1D.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
