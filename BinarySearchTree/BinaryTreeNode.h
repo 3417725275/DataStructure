@@ -1,7 +1,7 @@
 #pragma once
 
-#ifndef _BinaryTreeNode_H
-#define _BinaryTreeNode_H
+#ifndef _BinaryTreeNode_H_
+#define _BinaryTreeNode_H_
 #include <iostream>
 #include <queue>
 

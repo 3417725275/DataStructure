@@ -5,8 +5,8 @@
 //相当于在原有的二叉树基础上加了排序，排序可以根据节点的值，也可以另外加一个键值
 //这里直接用二叉树的节点值进行排序
 
-#ifndef _BSTree_H
-#define _BSTree_H
+#ifndef _BSTree_H_
+#define _BSTree_H_
 #include "BinaryTree.h"
 
 

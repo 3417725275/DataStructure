@@ -1,7 +1,7 @@
 #pragma once
 
-#ifndef _BinaryTree_H
-#define _BianryTree_H
+#ifndef _BinaryTree_H_
+#define _BianryTree_H_
 
 #include "BinaryTreeNode.h"
 
