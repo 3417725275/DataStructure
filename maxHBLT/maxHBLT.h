@@ -12,8 +12,7 @@ template<typename T>
 class maxHblt : public BinaryTree<T>
 {
 public:
-	maxHblt() {}
-	maxHblt(BinaryTreeNode<T>* x);
+	maxHblt():root(nullptr) {}
 	~maxHblt() { delete root; }
 
 	bool empty() const { return BinaryTree<T>::empty(); }
