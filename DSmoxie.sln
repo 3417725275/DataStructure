@@ -11,6 +11,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "maxHeap", "maxHeap\maxHeap.
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "maxHBLT", "maxHBLT\maxHBLT.vcxproj", "{E34E326A-D721-4448-9285-E0D7F733C15E}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AVLTree", "..\..\..\2021hanjia\数据结构\DSmoxie\AVLTree\AVLTree.vcxproj", "{F717F8C5-AE53-4B94-A9D6-2BDBC27375B6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -51,6 +53,14 @@ Global
 		{E34E326A-D721-4448-9285-E0D7F733C15E}.Release|x64.Build.0 = Release|x64
 		{E34E326A-D721-4448-9285-E0D7F733C15E}.Release|x86.ActiveCfg = Release|Win32
 		{E34E326A-D721-4448-9285-E0D7F733C15E}.Release|x86.Build.0 = Release|Win32
+		{F717F8C5-AE53-4B94-A9D6-2BDBC27375B6}.Debug|x64.ActiveCfg = Debug|x64
+		{F717F8C5-AE53-4B94-A9D6-2BDBC27375B6}.Debug|x64.Build.0 = Debug|x64
+		{F717F8C5-AE53-4B94-A9D6-2BDBC27375B6}.Debug|x86.ActiveCfg = Debug|Win32
+		{F717F8C5-AE53-4B94-A9D6-2BDBC27375B6}.Debug|x86.Build.0 = Debug|Win32
+		{F717F8C5-AE53-4B94-A9D6-2BDBC27375B6}.Release|x64.ActiveCfg = Release|x64
+		{F717F8C5-AE53-4B94-A9D6-2BDBC27375B6}.Release|x64.Build.0 = Release|x64
+		{F717F8C5-AE53-4B94-A9D6-2BDBC27375B6}.Release|x86.ActiveCfg = Release|Win32
+		{F717F8C5-AE53-4B94-A9D6-2BDBC27375B6}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
