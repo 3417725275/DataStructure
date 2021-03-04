@@ -17,7 +17,7 @@ public:
 	bool empty() const { return heapsize == 0; }
 	int size() const { return heapsize; }
 
-	//返回最大的值
+	//返回最大的元素
 	const T& top()
 	{	
 		if (heapsize != 0)

@@ -10,9 +10,9 @@ class BinaryTreeNode
 {
 public:
 	//构造
-	BinaryTreeNode() :leftchild(nullptr), rightchild(nullptr) {}
-	BinaryTreeNode(const T& dt,  BinaryTreeNode<T>* lc,  BinaryTreeNode<T>* rc) :data(dt), leftchild(lc), rightchild(rc) {}
-	BinaryTreeNode(const T& dt) :BinaryTreeNode(dt, nullptr, nullptr) {}
+	BinaryTreeNode() :leftchild(nullptr), rightchild(nullptr), s(-1) {}
+	BinaryTreeNode(const T& dt, BinaryTreeNode<T>* lc, BinaryTreeNode<T>* rc, int ns) : leftchild(lc), rightchild(rc), s(ns), data(dt) {}
+	BinaryTreeNode(const T& dt) :BinaryTreeNode(dt, nullptr, nullptr, -1) {}
 
 	//拷贝构造
 	BinaryTreeNode(const BinaryTreeNode<T> & x);
@@ -21,6 +21,7 @@ public:
 	T GetData() { return this != nullptr ? data : -1; }
 	BinaryTreeNode<T>* Getleftchild() const { return this != nullptr ? leftchild : nullptr; }
 	BinaryTreeNode<T>* Getrightchild() const { return this != nullptr ? rightchild : nullptr; }
+	int Get_s() { return this != nullptr ? data : -1; }
 
 	//设置成员值
 	void SetData(const T& dt)
@@ -30,20 +31,24 @@ public:
 			data = dt;
 		}
 	}
-	void Setleftchild(BinaryTreeNode<T>* lc)
+	void Setleftchild(const BinaryTreeNode<T>* lc)
 	{
 		if (this != nullptr)
 		{
 			leftchild = lc;
 		}
 	}
-	void Setrightchild(BinaryTreeNode<T>* rc)
+	void Setrightchild(const BinaryTreeNode<T>* rc)
 	{
 		if (this != nullptr)
 		{
 			rightchild = rc;
 		}
 	}
+
+	void Set_s(const int &i) { this != nullptr ? s = i : s = -1; }
+
+
 
 	//拷贝节点
 	BinaryTreeNode<T>* Copy(const BinaryTreeNode<T>* x);
@@ -74,8 +79,12 @@ public:
 	void levelOrder() const;//层次遍历
 
 private:
-	T data;
 	BinaryTreeNode<T>* leftchild, *rightchild;
+	int s;//s(x)的值，用于左高树
+	T data;
+
+
+
 };
 
 
