@@ -84,25 +84,23 @@ BinaryTreeNode<T>* AVLTree<T>::insert(const T & elem, BinaryTreeNode<T>* x)
 		//这里补充一个判断插入后是否是平衡二叉树，如果不是，要调整
 	}
 
-	
-			if (2 == depth(x->lchild) - depth(x->rchild)) {
-				if (elem < x->lchild->element)
-					x = single_rotate_with_left(x);
-				else
-					x = double_rotate_with_left(x);
-			}
-		}//else if
-		else {	//elem > x->element
-			x->rchild = insert(elem, x->rchild);
-			if (2 == depth(x->rchild) - depth(x->lchild)) {
-				if (elem > x->rchild->element)
-					x = single_rotate_with_right(x);
-				else
-					x = double_rotate_with_right(x);
-			}
-		}//else
-	}//else
-	return x;
-}
+
+	//if (2 == depth(x->lchild) - depth(x->rchild)) {
+	//	if (elem < x->lchild->element)
+	//		x = single_rotate_with_left(x);
+	//	else
+	//		x = double_rotate_with_left(x);
+	//}
+	//else {	//elem > x->element
+	//	x->rchild = insert(elem, x->rchild);
+	//	if (2 == depth(x->rchild) - depth(x->lchild)) {
+	//		if (elem > x->rchild->element)
+	//			x = single_rotate_with_right(x);
+	//		else
+	//			x = double_rotate_with_right(x);
+	//	}
+
+		return x;
+	}
 
 #endif
