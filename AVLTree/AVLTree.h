@@ -131,40 +131,53 @@ BinaryTreeNode<T>* AVLTree<T>::erase(const T & elem, BinaryTreeNode<T>* x)
 	}
 	else  //elem == x->GetData()
 	{
+		//删除过程要判断
+		//1.当前节点是不是叶节点
+		//2.删除之后看是否会破坏平衡性
 		if (x->Getleftchild() != nullptr && x->Getrightchild() != nullptr)
-		{
+		{//左右子树均不为空，这里类似于二叉搜索树的删除
+		 //如果左子树高就用左子树的最大值代替，右子树高就用右子树的最小值代替
 
+			if (x->Getleftchild()->height() > x->Getrightchild()->height()) //左高
+			{
+				//在x的左子树中寻找最大的元素(parent) ，也可将右子树的最小元素移到x
+				BinaryTreeNode<T> *parent = x, *max = x->Getleftchild(), *temp = nullptr;
+				while (temp = max->Getrightchild() != nullptr)
+				{
+					parent = max;  //左子树最大元素的双亲
+					max = temp;  //左子树最大元素
+				}
+				//将左子树最大元素max移到x，然后在x的左子树中删除max
+				x->SetData(max->GetData());
+				x->Setleftchild(erase(max->GetData(), x->Getleftchild()));
+			}
+			else  //右子树高
+			{
+				//在x的左子树中寻找最大的元素(parent) ，也可将右子树的最小元素移到x
+				BinaryTreeNode<T> *parent = x, *min = x->Getrightchild(), *temp = nullptr;
+				while (temp = min->Getleftchild() != nullptr)
+				{
+					parent = min;  //左子树最大元素的双亲
+					min = temp;  //左子树最大元素
+				}
+				//将左子树最大元素min移到x，然后在x的左子树中删除min
+				x->SetData(min->GetData());
+				x->Setrightchild(erase(min->GetData(), x->Getrightchild()));
+			}
 		}
-		else
+		else //左右子树中只有一个为nullptr
 		{
-
-
+			BinaryTreeNode<T>* temp = x;
+			if (x->Getleftchild() != nullptr) //左子树不为空
+				x = x->Getleftchild();
+			else if (x->Getrightchild() != nullptr) //右子树不为空
+				x = x->Getrightchild();
+			else //左右子树都为空
+				x = nullptr;
+			delete temp;
 		}
 	}
-
-	return x;
-
-		else { //elem == pTn->element
-			if (pTn->lchild != 0 && pTn->rchild != 0) {
-				PBtn ptm = delete_min(pTn->rchild);
-				if (ptm == pTn->rchild)
-					pTn->rchild = ptm->rchild;
-				pTn->element = ptm->element;
-				delete ptm;
-				--hb_size;
-			}
-			else {
-				PBtn ptm = pTn;
-				if (0 == pTn->lchild)
-					pTn = pTn->rchild;
-				else  //pTn->rchild == 0
-					pTn = pTn->lchild;
-				delete ptm;
-				--hb_size;
-			}
-		}//end of else(elem == pTn->element)
-	}//else
-	return pTn;
+	return x; //返回删除了元素elem的根节点x
 }
 
 #endif
