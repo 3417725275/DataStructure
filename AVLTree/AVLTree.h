@@ -8,8 +8,8 @@
 template<typename T>
 class AVLTree :public BinaryTree
 {
-	void insert(const T& elem);
-	void erase(const T& elem);
+	void insert(const T& elem) { insert(elem, root); }
+	void erase(const T& elem) { erase(elem, root); }
 
 	//LL单旋，x是最小不平衡二叉树的根节点,返回新的根
 	BinaryTreeNode<T>* LL_rotate(BinaryTreeNode<T>* x);
@@ -26,8 +26,9 @@ private:
 	//在以x为根的平衡二叉树中删除elem，返回新的根
 	BinaryTreeNode<T>* erase(const T& elem, BinaryTreeNode<T>* x);
 
-};
+	BinaryTreeNode<T>* root;
 
+};
 
 
 template<typename T>
@@ -109,6 +110,7 @@ BinaryTreeNode<T>* AVLTree<T>::erase(const T & elem, BinaryTreeNode<T>* x)
 
 	if (elem < x->GetData())
 	{
+		//左子树删除引起的不平衡相当于在右子树插入引起的不平衡
 		x->Setleftchild(erase(elem, x->Getleftchild()));  //在左子树删除该元素
 		if ((x->Getrightchild()->height() - x->Getleftchild()->height()) == 2)
 		{
@@ -120,9 +122,11 @@ BinaryTreeNode<T>* AVLTree<T>::erase(const T & elem, BinaryTreeNode<T>* x)
 	}
 	else if (elem > x->GetData()) //在右子树删除该元素
 	{
+		//右子树删除引起的不平衡相当于在左子树插入引起的不平衡
 		x->Setrightchild(erase(elem, x->Getrightchild()));  //在左子树删除该元素
-		if ((x->Getleftchild()->height() - x->Getleftchild()->height()) == 2)
+		if ((x->Getleftchild()->height() - x->Getrightchild()->height()) == 2) //在左子树删除元素后判断左子树是否平衡
 		{
+			//判断是哪种不平衡
 			if (x->Getleftchild()->Getleftchild()->height() > x->Getleftchild()->Getrightchild()->height())
 				x = LL_rotate(x);  //LL型
 			else  //LR型
