@@ -3,6 +3,7 @@
 
 #include "stdafx.h"
 #include "arrayList.h"
+#include "vectorList.h"
 
 int main()
 {
