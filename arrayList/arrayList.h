@@ -27,8 +27,8 @@ public:
 	T& get(int theIndex) const;//返回索引为theIndex的元素
 	int indexOf(const T& theElement);//求元素theElement第一次出现时的索引
 	void erase(int theIndex);//删除索引为theIndex的元素
-	void insert(int theIndex, const T& theElement) = 0;//把theElement元素插入到索引theIndex处
-	void output(ostream & out)const = 0;//输出线性表
+	void insert(int theIndex, const T& theElement);//把theElement元素插入到索引theIndex处
+	void output(ostream & out)const;//输出线性表
 
 
 protected:
