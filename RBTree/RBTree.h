@@ -36,26 +36,20 @@ public:
 	RBTNode<T>* search(T key);
 	// (非递归实现)查找"红黑树"中键值为key的节点
 	RBTNode<T>* iterativeSearch(T key);
-
 	// 查找最小结点：返回最小结点的键值。
 	T minimum();
 	// 查找最大结点：返回最大结点的键值。
 	T maximum();
-
 	// 找结点(x)的后继结点。即，查找"红黑树中数据值大于该结点"的"最小结点"。
 	RBTNode<T>* successor(RBTNode<T> *x);
 	// 找结点(x)的前驱结点。即，查找"红黑树中数据值小于该结点"的"最大结点"。
 	RBTNode<T>* predecessor(RBTNode<T> *x);
-
 	// 将结点(key为节点键值)插入到红黑树中
 	void insert(T key);
-
 	// 删除结点(key为节点键值)
 	void remove(T key);
-
 	// 销毁红黑树
 	void destroy();
-
 	// 打印红黑树
 	void print();
 private:
@@ -210,14 +204,15 @@ void RBTree<T>::rightRotate(RBTNode<T>* &root, RBTNode<T>* y)
 */
 template <class T>
 void RBTree<T>::insert(RBTNode<T>* &root, RBTNode<T>* node)
-{
+{//node是要插入的结点
+
 	RBTNode<T> *y = NULL;
 	RBTNode<T> *x = root;
 
 	// 1. 将红黑树当作一颗二叉查找树，将节点添加到二叉查找树中。
 	while (x != NULL)
 	{
-		y = x;
+		y = x;//y是x的父节点，x是可以插入的位置
 		if (node->key < x->key)
 			x = x->left;
 		else
@@ -279,7 +274,7 @@ void RBTree<T>::insertFixUp(RBTNode<T>* &root, RBTNode<T>* node)
 	// 若“父节点存在，并且父节点的颜色是红色”
 	while ((parent = rb_parent(node)) && rb_is_red(parent))
 	{
-		gparent = rb_parent(parent);
+		gparent = rb_parent(parent);//插入结点的祖父结点
 
 		//若“父节点”是“祖父节点的左孩子”
 		if (parent == gparent->left)
@@ -289,15 +284,15 @@ void RBTree<T>::insertFixUp(RBTNode<T>* &root, RBTNode<T>* node)
 				RBTNode<T> *uncle = gparent->right;
 				if (uncle && rb_is_red(uncle))
 				{
-					rb_set_black(uncle);
-					rb_set_black(parent);
-					rb_set_red(gparent);
-					node = gparent;
+					rb_set_black(uncle);   //叔叔变黑
+					rb_set_black(parent); //父亲变黑
+					rb_set_red(gparent);  //祖父变红
+					node = gparent;  
 					continue;
 				}
 			}
 
-			// Case 2条件：叔叔是黑色，且当前节点是右孩子
+			// Case 2条件：叔叔是黑色，且当前节点是右孩子   //三角型
 			if (parent->right == node)
 			{
 				RBTNode<T> *tmp;
@@ -305,13 +300,14 @@ void RBTree<T>::insertFixUp(RBTNode<T>* &root, RBTNode<T>* node)
 				tmp = parent;
 				parent = node;
 				node = tmp;
+				//一顿操作转换到Case 3:
 			}
 
-			// Case 3条件：叔叔是黑色，且当前节点是左孩子。
+			// Case 3条件：叔叔是黑色，且当前节点是左孩子。  //直线型
 			rb_set_black(parent);
 			rb_set_red(gparent);
 			rightRotate(root, gparent);
-		}
+		} 
 		else//若“z的父节点”是“z的祖父节点的右孩子”
 		{
 			// Case 1条件：叔叔节点是红色
@@ -335,6 +331,7 @@ void RBTree<T>::insertFixUp(RBTNode<T>* &root, RBTNode<T>* node)
 				tmp = parent;
 				parent = node;
 				node = tmp;
+				//一顿操作转换到Case 3:
 			}
 
 			// Case 3条件：叔叔是黑色，且当前节点是右孩子。
@@ -343,7 +340,6 @@ void RBTree<T>::insertFixUp(RBTNode<T>* &root, RBTNode<T>* node)
 			leftRotate(root, gparent);
 		}
 	}
-
 	// 将根节点设为黑色
 	rb_set_black(root);
 }
@@ -356,7 +352,7 @@ void RBTree<T>::insertFixUp(RBTNode<T>* &root, RBTNode<T>* node)
 *     node 删除的结点
 */
 template <class T>
-void RBTree<T>::remove(RBTNode<T>* &root, RBTNode<T> *node)
+void RBTree<T>::remove(RBTNode<T>* &root, RBTNode<T> *node)//删除操作类似于二叉搜索树
 {
 	RBTNode<T> *child, *parent;
 	RBTColor color;
@@ -368,7 +364,7 @@ void RBTree<T>::remove(RBTNode<T>* &root, RBTNode<T> *node)
 		// 用它来取代"被删节点"的位置，然后再将"被删节点"去掉。
 		RBTNode<T> *replace = node;
 
-		// 获取后继节点
+		// 获取后继节点,选择右子树中最大的元素或者左子树中最小的元素
 		replace = replace->right;
 		while (replace->left != NULL)
 			replace = replace->left;
@@ -376,9 +372,9 @@ void RBTree<T>::remove(RBTNode<T>* &root, RBTNode<T> *node)
 		// "node节点"不是根节点(只有根节点不存在父节点)
 		if (rb_parent(node))
 		{
-			if (rb_parent(node)->left == node)
+			if (rb_parent(node)->left == node)//删除的结点是左结点
 				rb_parent(node)->left = replace;
-			else
+			else//删除的结点是右结点
 				rb_parent(node)->right = replace;
 		}
 		else
@@ -400,7 +396,7 @@ void RBTree<T>::remove(RBTNode<T>* &root, RBTNode<T> *node)
 		else
 		{
 			// child不为空
-			if (child)
+			if (child) // child是"取代节点"的右孩子，也是需要"调整的节点"。
 				rb_set_parent(child, parent);
 			parent->left = child;
 
@@ -483,7 +479,7 @@ void RBTree<T>::removeFixUp(RBTNode<T>* &root, RBTNode<T> *node, RBTNode<T> *par
 	{
 		if (parent->left == node)
 		{
-			other = parent->right;
+			other = parent->right; //other是x的兄弟
 			if (rb_is_red(other))
 			{
 				// Case 1: x的兄弟w是红色的  
@@ -504,13 +500,13 @@ void RBTree<T>::removeFixUp(RBTNode<T>* &root, RBTNode<T> *node, RBTNode<T> *par
 			{
 				if (!other->right || rb_is_black(other->right))
 				{
-					// Case 3: x的兄弟w是黑色的，并且w的左孩子是红色，右孩子为黑色。  
+					// Case 3: x的兄弟w是黑色的，并且w的左孩子是红色，右孩子为黑色。   左红右黑
 					rb_set_black(other->left);
 					rb_set_red(other);
 					rightRotate(root, other);
 					other = parent->right;
 				}
-				// Case 4: x的兄弟w是黑色的；并且w的右孩子是红色的，左孩子任意颜色。
+				// Case 4: x的兄弟w是黑色的；并且w的右孩子是红色的，左孩子任意颜色。    右红左黑
 				rb_set_color(other, rb_color(parent));
 				rb_set_black(parent);
 				rb_set_black(other->right);
@@ -519,7 +515,7 @@ void RBTree<T>::removeFixUp(RBTNode<T>* &root, RBTNode<T> *node, RBTNode<T> *par
 				break;
 			}
 		}
-		else
+		else // parent->left != node
 		{
 			other = parent->left;
 			if (rb_is_red(other))
