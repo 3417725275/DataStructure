@@ -37,7 +37,7 @@ public:
 	void PostOrder() const;
 	void levelOrder() const;
 
-	//查找和插入
+	//查找和插入	
 	BinaryTreeNode<T>* find(T& dt) const;
 	bool insert(const T& item);
 
