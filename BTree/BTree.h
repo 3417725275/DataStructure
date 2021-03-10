@@ -17,7 +17,7 @@ private:
 		bool isLeaf;             //是否是叶子节点
 		int keyNum;              //节点包含的关键字数量
 		T keyValue[KEY_MAX];     //关键字的值数组
-		Node *pChild[CHILD_MAX]; //子树指针数组
+		Node* pChild[CHILD_MAX]; //子树指针数组
 
 		Node(bool b = true, int n = 0)
 			:isLeaf(b), keyNum(n) {}
@@ -86,10 +86,12 @@ public:
 		recursive_remove(m_pRoot, key);
 		return true;
 	}
+
 	void display()const //打印树的关键字
 	{
 		displayInConcavo(m_pRoot, KEY_MAX * 10);
 	}
+
 	bool contain(const T &key)const   //检查该key是否存在于B树中
 	{
 		return search(m_pRoot, key);
