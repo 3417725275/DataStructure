@@ -364,7 +364,7 @@ void RBTree<T>::remove(RBTNode<T>* &root, RBTNode<T> *node)//É¾³ý²Ù×÷ÀàËÆÓÚ¶þ²æË
 		// ÓÃËüÀ´È¡´ú"±»É¾½Úµã"µÄÎ»ÖÃ£¬È»ºóÔÙ½«"±»É¾½Úµã"È¥µô¡£
 		RBTNode<T> *replace = node;
 
-		// »ñÈ¡ºó¼Ì½Úµã,Ñ¡ÔñÓÒ×ÓÊ÷ÖÐ×î´óµÄÔªËØ»òÕß×ó×ÓÊ÷ÖÐ×îÐ¡µÄÔªËØ
+		// »ñÈ¡ºó¼Ì½Úµã,Ñ¡ÔñÓÒ×ÓÊ÷ÖÐ×îÐ¡µÄÔªËØ»òÕß×ó×ÓÊ÷ÖÐ×î´óµÄÔªËØ
 		replace = replace->right;
 		while (replace->left != NULL)
 			replace = replace->left;
@@ -430,7 +430,7 @@ void RBTree<T>::remove(RBTNode<T>* &root, RBTNode<T> *node)//É¾³ý²Ù×÷ÀàËÆÓÚ¶þ²æË
 
 	// "node½Úµã"²»ÊÇ¸ù½Úµã
 	if (parent)
-	{
+	{ 
 		if (parent->left == node)
 			parent->left = child;
 		else

@@ -106,7 +106,7 @@ BinaryTreeNode<T>* AVLTree<T>::erase(const T & elem, BinaryTreeNode<T>* x)
 {
 	if (x == nullptr)
 		return x;
-
+	//考虑了删除元素不存在的情况
 
 	if (elem < x->GetData())
 	{
