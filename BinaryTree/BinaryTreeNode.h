@@ -195,5 +195,4 @@ bool equal(const BinaryTreeNode<T>* a, const BinaryTreeNode<T>* b)
 	return false;
 }
 
-
 #endif

@@ -47,7 +47,6 @@ void maxHblt<T>::pop()
 {
 	if (root == nullptr)
 		return;
-
 	BinaryTreeNode<T> *left = root->Getleftchild();
 	BinaryTreeNode<T> *right = root->Getrightchild();
 	delete root;

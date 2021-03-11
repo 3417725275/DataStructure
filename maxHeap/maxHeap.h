@@ -45,7 +45,6 @@ template<typename T>
 void maxHeap<T>::pop()
 {
 	//具体流程见P301
-
 	if (heapsize == 0)
 		return;
 
