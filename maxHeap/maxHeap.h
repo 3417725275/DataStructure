@@ -106,13 +106,14 @@ void maxHeap<T>::initialize(T *theHeap, int theSize)
 
 	//heapify 
 	//heapsize/2为最后一个叶子节点的根节点，如果heapsize=1，那么就不对了，
+	//双亲结点编号范围[heapsize/2]~1,取下界
 	for (int root = heapsize / 2; root >= 1; root--)
 	{
 		T rootElement = heap[root]; //rootElement是要调整的值
 
 		//查找插入rootElement元素的位置
 		int child = 2 * root; // 找到这个根节点的左孩子节点
-		while (child < heapsize)  //左孩子节点存在，child>heapsize表示该节点是叶节点
+		while (chil	d < heapsize)  //左孩子节点存在，child>heapsize表示该节点是叶节点
 		{
 			if (child < heapsize && heap[child] < heap[child + 1])
 				child++;  //如果左孩子节点存在并且左孩子节点小于右孩子节点，那么child变成右孩子节点位置
