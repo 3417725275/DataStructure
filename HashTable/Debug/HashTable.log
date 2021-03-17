@@ -1,0 +1,9 @@
+﻿  main.cpp
+g:\数据结构\dsmoxie\hashtable\hashchains.h(28): error C2872: “hash”: 不明确的符号
+  g:\数据结构\dsmoxie\hashtable\hash.h(8): note: 可能是“hash”
+  e:\program files (x86)\microsoft visual studio 14.0\vc\include\xstddef(373): note: 或  “std::hash”
+  g:\数据结构\dsmoxie\hashtable\hashchains.h(31): note: 参见对正在编译的类 模板 实例化“hashChains<K,E>”的引用
+g:\数据结构\dsmoxie\hashtable\hashtable.h(25): error C2872: “hash”: 不明确的符号
+  g:\数据结构\dsmoxie\hashtable\hash.h(8): note: 可能是“hash”
+  e:\program files (x86)\microsoft visual studio 14.0\vc\include\xstddef(373): note: 或  “std::hash”
+  g:\数据结构\dsmoxie\hashtable\hashtable.h(28): note: 参见对正在编译的类 模板 实例化“hashTable<K,E>”的引用
